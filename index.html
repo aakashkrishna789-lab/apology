@@ -1,87 +1,98 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<title>Please Forgive Me 😭</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@400&display=swap" rel="stylesheet">
-<style>
-body,html{margin:0;padding:0;font-family:'Roboto',sans-serif;overflow-x:hidden;scroll-behavior:smooth;background:linear-gradient(135deg,#fffaf0,#f9f0e6);}
-section{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:20px;position:relative;transition:transform .8s ease,opacity .8s ease;}
-h1,h2{font-family:'Playfair Display',serif;font-weight:700;color:#bfa14a;text-shadow:2px 2px 10px rgba(0,0,0,.15);letter-spacing:1px;}
-p{font-size:1.1rem;margin:20px 0;line-height:1.5;}
-button{padding:16px 40px;border-radius:50px;border:2px solid #bfa14a;font-family:'Playfair Display',serif;font-weight:bold;font-size:1.2rem;background:linear-gradient(135deg,#fff5e6,#ffe6b3);color:#6b4c1a;cursor:pointer;box-shadow:0 5px 15px rgba(0,0,0,.15);margin:12px;transition:.4s all;}
-button:hover{transform:scale(1.08);box-shadow:0 12px 25px rgba(255,215,0,.6);animation:glow 1s infinite alternate;}
-@keyframes glow{0%{box-shadow:0 10px 20px rgba(255,215,0,.5);}100%{box-shadow:0 15px 30px rgba(255,223,0,.8);}}
-.cat{font-family:monospace;font-size:20px;margin-top:20px;animation:float 3s ease-in-out infinite alternate,glowCat 2s ease-in-out infinite alternate;}
-@keyframes float{0%{transform:translateY(0);}100%{transform:translateY(-12px);}}
-@keyframes glowCat{0%,100%{text-shadow:0 0 2px #ffd700;}50%{text-shadow:0 0 10px #ffeb99;}}
-.sparkle,.confettiParticle,.backgroundCat{position:absolute;border-radius:50%;}
-.sparkle{width:6px;height:6px;background:gold;opacity:.8;animation:sparkleAnim 1.5s linear infinite;}
-@keyframes sparkleAnim{0%{transform:translateY(0) scale(1);opacity:.8;}50%{transform:translateY(-10px) scale(1.3);opacity:1;}100%{transform:translateY(0) scale(1);opacity:.8;}}
-.confettiParticle{width:8px;height:8px;animation:confettiFall 4s linear infinite;}
-@keyframes confettiFall{0%{transform:translateY(0) rotate(0deg);}100%{transform:translateY(100vh) rotate(360deg);}}
-.backgroundCat{font-family:monospace;font-size:24px;opacity:.15;pointer-events:none;animation:float 6s ease-in-out infinite alternate;}
-@media(min-width:600px){h1,h2{font-size:3rem;}button{font-size:1.3rem;padding:18px 45px;}.cat{font-size:22px;}}
-</style>
-</head>
-<body>
-<section id="section1" class="active">
-<h1>Please Forgive Me 🙏</h1>
-<p>Will you forgive me? Yes ✅ or No ❌</p>
-<button id="yesBtn">Yes ✅</button>
-<button id="noBtn">No ❌</button>
-<div id="response"></div>
-<div class="cat" id="catArt">/\_/\ ( ^.^ ) > ♥ <</div>
-</section>
-
-<section id="section2">
-<h2>Yay! 🥳</h2>
-<p>Next step! ✨</p>
-<button id="continueBtn1">Continue ➡️</button>
-<div class="cat">/\_/\ ( ^.^ ) > ♥ <</div>
-</section>
-
-<section id="section3">
-<h2>Almost There! 😎</h2>
-<p>Small gestures matter 💛 Continue?</p>
-<button id="continueBtn2">Continue ➡️</button>
-<div class="cat">/\_/\ ( -.- ) > ♥ <</div>
-</section>
-
-<section id="section4">
-<h2>Thank You So Muchhh 🎉✨😻</h2>
-<p>You're awesome! 💖💫 Celebrate your kindness! 🥳🎈</p>
-<div class="cat">/\_/\ ( ^_^ ) > ♥ <</div>
-</section>
-
 <script>
-const s=document.querySelectorAll('section'),
-      y=document.getElementById('yesBtn'),
-      n=document.getElementById('noBtn'),
-      c1=document.getElementById('continueBtn1'),
-      c2=document.getElementById('continueBtn2'),
-      r=document.getElementById('response'),
-      cat=document.getElementById('catArt');
-let count=0;
+const sections = document.querySelectorAll('section');
+const yesBtn = document.getElementById('yesBtn');
+const noBtn = document.getElementById('noBtn');
+const continueBtn1 = document.getElementById('continueBtn1');
+const continueBtn2 = document.getElementById('continueBtn2');
+const response = document.getElementById('response');
+const cat = document.getElementById('catArt');
 
-function activate(sec){s.forEach(x=>x.classList.remove('active'));sec.classList.add('active');window.scrollTo({top:0,behavior:'smooth'});}
-function moveNo(){const w=window.innerWidth-n.offsetWidth-20,h=window.innerHeight-n.offsetHeight-20;n.style.position='absolute';n.style.left=Math.random()*w+'px';n.style.top=Math.random()*h+'px';}
-function sparkle(p){const sp=document.createElement('div');sp.className='sparkle';sp.style.left=Math.random()*80+'%';sp.style.top=Math.random()*80+'%';p.appendChild(sp);setTimeout(()=>p.removeChild(sp),1500);}
-function confetti(){for(let i=0;i<60;i++){const f=document.createElement('div');f.className='confettiParticle';f.style.left=Math.random()*100+'%';f.style.background=['gold','#ffd700','#fffacd','#f0e68c'][Math.floor(Math.random()*4)];f.style.animationDuration=(2+Math.random()*3)+'s';document.body.appendChild(f);setTimeout(()=>document.body.removeChild(f),5000);}}
+let currentSection = 0;
 
-for(let i=0;i<20;i++){const b=document.createElement('div');b.className='backgroundCat';b.style.left=Math.random()*90+'%';b.style.top=Math.random()*90+'%';b.textContent='/\\_/\\';document.body.appendChild(b);}
+// Helper: activate section
+function activate(section) {
+  sections.forEach(s => s.classList.remove('active'));
+  section.classList.add('active');
+  window.scrollTo({top:0, behavior:'smooth'});
+}
 
-y.addEventListener('click',()=>{
-  count++;
-  if(count===2){activate(document.getElementById('section2'));sparkle(document.getElementById('section2'));}
-  else{r.textContent="Are you sure? 🤔";cat.textContent="/\\_/\\ ( ^.^ ) > ♥ <";sparkle(document.getElementById('section1'));}
+// Helper: sparkle effect
+function sparkle(parent) {
+  const sp = document.createElement('div');
+  sp.className = 'sparkle';
+  sp.style.left = Math.random() * 80 + '%';
+  sp.style.top = Math.random() * 80 + '%';
+  parent.appendChild(sp);
+  setTimeout(() => parent.removeChild(sp), 1500);
+}
+
+// Helper: confetti effect
+function confetti() {
+  for(let i=0;i<60;i++){
+    const f = document.createElement('div');
+    f.className='confettiParticle';
+    f.style.left=Math.random()*100+'%';
+    f.style.background=['gold','#ffd700','#fffacd','#f0e68c'][Math.floor(Math.random()*4)];
+    f.style.animationDuration=(2+Math.random()*3)+'s';
+    document.body.appendChild(f);
+    setTimeout(()=>document.body.removeChild(f),5000);
+  }
+}
+
+// Helper: move No button randomly
+function moveNo(){
+  const w = window.innerWidth - noBtn.offsetWidth - 20;
+  const h = window.innerHeight - noBtn.offsetHeight - 20;
+  noBtn.style.position='absolute';
+  noBtn.style.left=Math.random()*w+'px';
+  noBtn.style.top=Math.random()*h+'px';
+}
+
+// Initialize background cats
+for(let i=0;i<20;i++){
+  const b = document.createElement('div');
+  b.className='backgroundCat';
+  b.style.left=Math.random()*90+'%';
+  b.style.top=Math.random()*90+'%';
+  b.textContent='/\\_/\\';
+  document.body.appendChild(b);
+}
+
+// --- Button Events ---
+
+// Yes button: advance through sections
+yesBtn.addEventListener('click', () => {
+  if(currentSection === 0){
+    response.textContent = "Are you sure? 🤔";
+    cat.textContent = "/\\_/\\ ( ^.^ ) > ♥ <";
+    sparkle(sections[0]);
+  } else {
+    currentSection++;
+    if(currentSection < sections.length){
+      activate(sections[currentSection]);
+      sparkle(sections[currentSection]);
+    }
+  }
 });
 
-c1.addEventListener('click',()=>{activate(document.getElementById('section3'));sparkle(document.getElementById('section3'));});
-c2.addEventListener('click',()=>{activate(document.getElementById('section4'));confetti();});
-n.addEventListener('click',()=>{r.textContent="I really hope you’ll reconsider 😅🙏";cat.textContent="/\\_/\\ ( o_o ) > ♥ <";moveNo();});
-n.addEventListener('mouseover',moveNo);
+// No button: playfully dodge
+noBtn.addEventListener('click', () => {
+  response.textContent = "I really hope you’ll reconsider 😅🙏";
+  cat.textContent = "/\\_/\\ ( o_o ) > ♥ <";
+  moveNo();
+});
+noBtn.addEventListener('mouseover', moveNo);
+
+// Continue buttons
+continueBtn1.addEventListener('click', () => {
+  currentSection++;
+  activate(sections[currentSection]);
+  sparkle(sections[currentSection]);
+});
+
+continueBtn2.addEventListener('click', () => {
+  currentSection++;
+  activate(sections[currentSection]);
+  confetti();
+});
 </script>
-</body>
-</html>
