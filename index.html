@@ -34,31 +34,50 @@ button:hover{transform:scale(1.08);box-shadow:0 12px 25px rgba(255,215,0,.6);ani
 <div id="response"></div>
 <div class="cat" id="catArt">/\_/\ ( ^.^ ) > ♥ <</div>
 </section>
+
 <section id="section2">
 <h2>Yay! 🥳</h2>
 <p>Next step! ✨</p>
 <button id="continueBtn1">Continue ➡️</button>
 <div class="cat">/\_/\ ( ^.^ ) > ♥ <</div>
 </section>
+
 <section id="section3">
 <h2>Almost There! 😎</h2>
 <p>Small gestures matter 💛 Continue?</p>
 <button id="continueBtn2">Continue ➡️</button>
 <div class="cat">/\_/\ ( -.- ) > ♥ <</div>
 </section>
+
 <section id="section4">
-<h2>Thank You So Muchhh 🎉✨</h2>
-<p>You’re awesome! Thanks a ton 😻💖</p>
+<h2>Thank You So Muchhh 🎉✨😻</h2>
+<p>You're awesome! 💖💫 Celebrate your kindness! 🥳🎈</p>
 <div class="cat">/\_/\ ( ^_^ ) > ♥ <</div>
 </section>
+
 <script>
-const s=document.querySelectorAll('section'),y=document.getElementById('yesBtn'),n=document.getElementById('noBtn'),c1=document.getElementById('continueBtn1'),c2=document.getElementById('continueBtn2'),r=document.getElementById('response'),cat=document.getElementById('catArt');let count=0;
+const s=document.querySelectorAll('section'),
+      y=document.getElementById('yesBtn'),
+      n=document.getElementById('noBtn'),
+      c1=document.getElementById('continueBtn1'),
+      c2=document.getElementById('continueBtn2'),
+      r=document.getElementById('response'),
+      cat=document.getElementById('catArt');
+let count=0;
+
 function activate(sec){s.forEach(x=>x.classList.remove('active'));sec.classList.add('active');window.scrollTo({top:0,behavior:'smooth'});}
 function moveNo(){const w=window.innerWidth-n.offsetWidth-20,h=window.innerHeight-n.offsetHeight-20;n.style.position='absolute';n.style.left=Math.random()*w+'px';n.style.top=Math.random()*h+'px';}
 function sparkle(p){const sp=document.createElement('div');sp.className='sparkle';sp.style.left=Math.random()*80+'%';sp.style.top=Math.random()*80+'%';p.appendChild(sp);setTimeout(()=>p.removeChild(sp),1500);}
 function confetti(){for(let i=0;i<60;i++){const f=document.createElement('div');f.className='confettiParticle';f.style.left=Math.random()*100+'%';f.style.background=['gold','#ffd700','#fffacd','#f0e68c'][Math.floor(Math.random()*4)];f.style.animationDuration=(2+Math.random()*3)+'s';document.body.appendChild(f);setTimeout(()=>document.body.removeChild(f),5000);}}
+
 for(let i=0;i<20;i++){const b=document.createElement('div');b.className='backgroundCat';b.style.left=Math.random()*90+'%';b.style.top=Math.random()*90+'%';b.textContent='/\\_/\\';document.body.appendChild(b);}
-y.addEventListener('click',()=>{count++;if(count===2){activate(document.getElementById('section2'));sparkle(document.getElementById('section2'));}else{r.textContent="Are you sure? 🤔";cat.textContent="/\\_/\\ ( ^.^ ) > ♥ <";sparkle(document.getElementById('section1'));}});
+
+y.addEventListener('click',()=>{
+  count++;
+  if(count===2){activate(document.getElementById('section2'));sparkle(document.getElementById('section2'));}
+  else{r.textContent="Are you sure? 🤔";cat.textContent="/\\_/\\ ( ^.^ ) > ♥ <";sparkle(document.getElementById('section1'));}
+});
+
 c1.addEventListener('click',()=>{activate(document.getElementById('section3'));sparkle(document.getElementById('section3'));});
 c2.addEventListener('click',()=>{activate(document.getElementById('section4'));confetti();});
 n.addEventListener('click',()=>{r.textContent="I really hope you’ll reconsider 😅🙏";cat.textContent="/\\_/\\ ( o_o ) > ♥ <";moveNo();});
