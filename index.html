@@ -39,7 +39,7 @@ button:hover{transform:scale(1.08);box-shadow:0 12px 25px rgba(255,215,0,.6);ani
 
 <section id="section2">
 <h2>Yay! 🥳</h2>
-<p>Thank youuuu so much 🫶😘 </p>
+<p>Thank youuuu so much 🫶😘</p>
 <div class="cat">/\_/\ ( ^_^ ) > ♥ <</div>
 </section>
 
@@ -128,12 +128,16 @@ yesBtn.addEventListener('click', ()=>{
     response.textContent = "Are you sure? 🤔";
     cat.textContent = catReactions[0];
     sparkle(sections[0]);
-    currentSection++; // move to next on second click
+    currentSection++; 
   } else if(currentSection < sections.length - 1){
     activate(sections[currentSection]);
     cat.textContent = catReactions[currentSection];
     sparkle(sections[currentSection]);
-    if(currentSection === sections.length - 1) confetti();
+    if(currentSection === sections.length - 1){
+      confetti();
+      response.textContent = "Thank you so much! 💖🎉";
+      launchFlyingCats(); // Final effect!
+    }
     currentSection++;
   }
 });
@@ -146,6 +150,33 @@ noBtn.addEventListener('click', ()=>{
 });
 noBtn.addEventListener('mouseover', moveNo);
 
+// --- Final Flying Cats Effect ---
+function launchFlyingCats(){
+  for(let i=0;i<15;i++){
+    const fCat = document.createElement('div');
+    fCat.className='backgroundCat';
+    fCat.style.left = Math.random()*100 + 'vw';
+    fCat.style.top = Math.random()*100 + 'vh';
+    fCat.style.fontSize = (20 + Math.random()*15) + 'px';
+    fCat.style.opacity = 0.8;
+    fCat.textContent = '/\\_/\\';
+    document.body.appendChild(fCat);
+
+    // Animate movement
+    const deltaX = (Math.random()-0.5)*200;
+    const deltaY = - (50 + Math.random()*150);
+    fCat.animate([
+      {transform:`translate(0px,0px)`, opacity:0.8},
+      {transform:`translate(${deltaX}px, ${deltaY}px)`, opacity:0}
+    ], {
+      duration: 4000 + Math.random()*2000,
+      easing: 'ease-out',
+      iterations: 1
+    });
+
+    setTimeout(()=>document.body.removeChild(fCat),6000);
+  }
+}
 </script>
 </body>
 </html>
