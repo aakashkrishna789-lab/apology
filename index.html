@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Grand Apology Experience</title>
+<title>Please forgive me 😭</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@400&display=swap" rel="stylesheet">
 <style>
     /* MODERN LUXURY STYLING */
@@ -49,7 +49,7 @@
         background: linear-gradient(135deg, #fff5e6, #ffe6b3);
         color: #6b4c1a;
         box-shadow: 0 6px 12px rgba(0,0,0,0.2);
-        position: relative; /* needed for moving the No button */
+        position: relative;
     }
 
     button:hover {
@@ -78,7 +78,7 @@
 
 <!-- SECTION 1: ASK FOR FORGIVENESS -->
 <section id="section1">
-    <h1>✨ The Grand Apology ✨</h1>
+    <h1>😭 Please forgive me 😭</h1>
     <p><strong>Will you forgive me? Yes or No.</strong></p>
     <button id="yesBtn">Yes 💖</button>
     <button id="noBtn">No 💔</button>
@@ -168,7 +168,6 @@
         section3.style.display = 'flex';
     });
 
-    // Move No button every time it is clicked
     noBtn.addEventListener('click', () => {
         responseDiv.innerHTML = "😭 Please forgive me, I’m truly sorry! I brought the finest virtual treats!";
         catArtDiv.textContent = `
@@ -180,7 +179,6 @@
         moveNoButton();
     });
 
-    // Optional: move No button on hover as well
     noBtn.addEventListener('mouseover', moveNoButton);
 </script>
 
