@@ -2,18 +2,16 @@
 const sections = document.querySelectorAll('section');
 const yesBtn = document.getElementById('yesBtn');
 const noBtn = document.getElementById('noBtn');
-const continueBtn1 = document.getElementById('continueBtn1');
-const continueBtn2 = document.getElementById('continueBtn2');
 const response = document.getElementById('response');
 const cat = document.getElementById('catArt');
 
 let currentSection = 0;
 
-// Helper: activate section
+// Helper: activate section with smooth scroll
 function activate(section) {
   sections.forEach(s => s.classList.remove('active'));
   section.classList.add('active');
-  window.scrollTo({top:0, behavior:'smooth'});
+  section.scrollIntoView({behavior:'smooth', block:'start'});
 }
 
 // Helper: sparkle effect
@@ -58,19 +56,31 @@ for(let i=0;i<20;i++){
   document.body.appendChild(b);
 }
 
+// Cat reactions per section
+const catReactions = [
+  "/\\_/\\ ( ^.^ ) > ♥ <",  // Section1
+  "/\\_/\\ ( ^_^ ) > ✨ <",  // Section2
+  "/\\_/\\ ( -.- ) > 💛 <",  // Section3
+  "/\\_/\\ ( ^o^ ) > 🎉 <"   // Section4 - Thank You
+];
+
 // --- Button Events ---
 
-// Yes button: advance through sections
+// Yes button: auto-advance to Thank You with effects
 yesBtn.addEventListener('click', () => {
   if(currentSection === 0){
     response.textContent = "Are you sure? 🤔";
-    cat.textContent = "/\\_/\\ ( ^.^ ) > ♥ <";
+    cat.textContent = catReactions[0];
     sparkle(sections[0]);
-  } else {
+  } else if(currentSection < sections.length - 1){
     currentSection++;
-    if(currentSection < sections.length){
-      activate(sections[currentSection]);
-      sparkle(sections[currentSection]);
+    activate(sections[currentSection]);
+    cat.textContent = catReactions[currentSection];
+    sparkle(sections[currentSection]);
+    // Automatically go to Thank You if next is last
+    if(currentSection === sections.length - 1){
+      confetti();
+      response.textContent = "Thank you so much! 💖🎉";
     }
   }
 });
@@ -82,17 +92,4 @@ noBtn.addEventListener('click', () => {
   moveNo();
 });
 noBtn.addEventListener('mouseover', moveNo);
-
-// Continue buttons
-continueBtn1.addEventListener('click', () => {
-  currentSection++;
-  activate(sections[currentSection]);
-  sparkle(sections[currentSection]);
-});
-
-continueBtn2.addEventListener('click', () => {
-  currentSection++;
-  activate(sections[currentSection]);
-  confetti();
-});
 </script>
