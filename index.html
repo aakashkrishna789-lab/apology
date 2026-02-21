@@ -108,6 +108,7 @@ button:hover {
 </head>
 <body>
 
+<!-- Sections -->
 <section id="section1" class="active">
     <h1>Please Forgive Me 🙏</h1>
     <p>Will you forgive me? Yes ✅ or No ❌</p>
@@ -137,6 +138,11 @@ button:hover {
     <div class="cat">/\\_/\\  ( ^_^ )  > ♥ <</div>
 </section>
 
+<!-- Sound Effects -->
+<audio id="clickSound" src="https://freesound.org/data/previews/256/256113_3263906-lq.mp3"></audio>
+<audio id="sparkleSound" src="https://freesound.org/data/previews/146/146725_2615111-lq.mp3"></audio>
+<audio id="confettiSound" src="https://freesound.org/data/previews/220/220173_4104083-lq.mp3"></audio>
+
 <script>
 const sections = document.querySelectorAll('section');
 const yesBtn = document.getElementById('yesBtn');
@@ -146,6 +152,10 @@ const continueBtn2 = document.getElementById('continueBtn2');
 const responseDiv = document.getElementById('response');
 const catArtDiv = document.getElementById('catArt');
 
+const clickSound = document.getElementById('clickSound');
+const sparkleSound = document.getElementById('sparkleSound');
+const confettiSound = document.getElementById('confettiSound');
+
 let yesCount = 0;
 
 // Activate section
@@ -153,6 +163,7 @@ function activateSection(section){
     sections.forEach(s=>s.classList.remove('active'));
     section.classList.add('active');
     window.scrollTo({top:0, behavior:'smooth'});
+    clickSound.play();
 }
 
 // Move No button randomly
@@ -162,6 +173,7 @@ function moveNoButton(){
     noBtn.style.position='absolute';
     noBtn.style.left=Math.random()*maxX+'px';
     noBtn.style.top=Math.random()*maxY+'px';
+    clickSound.play();
 }
 
 // Sparkle effect
@@ -171,10 +183,11 @@ function spawnSparkle(parent){
     sparkle.style.left=Math.random()*80+'%';
     sparkle.style.top=Math.random()*80+'%';
     parent.appendChild(sparkle);
+    sparkleSound.play();
     setTimeout(()=>parent.removeChild(sparkle),1500);
 }
 
-// Confetti
+// Confetti effect
 function spawnConfetti(){
     for(let i=0;i<60;i++){
         const conf=document.createElement('div');
@@ -183,8 +196,11 @@ function spawnConfetti(){
         conf.style.background=['gold','#ffd700','#fffacd','#f0e68c'][Math.floor(Math.random()*4)];
         conf.style.animationDuration=(2+Math.random()*3)+'s';
         document.body.appendChild(conf);
-        setTimeout(()=>document.body.removeChild(conf),5000);
     }
+    confettiSound.play();
+    setTimeout(()=>{
+        document.querySelectorAll('.confettiParticle').forEach(c=>c.remove());
+    },5000);
 }
 
 // Floating background cats
@@ -199,6 +215,7 @@ for(let i=0;i<20;i++){
 
 // Yes button logic
 yesBtn.addEventListener('click',()=>{
+    clickSound.play();
     yesCount++;
     if(yesCount===2){
         activateSection(document.getElementById('section2'));
@@ -211,11 +228,21 @@ yesBtn.addEventListener('click',()=>{
 });
 
 // Continue buttons
-continueBtn1.addEventListener('click',()=>{activateSection(document.getElementById('section3')); spawnSparkle(document.getElementById('section3'));});
-continueBtn2.addEventListener('click',()=>{activateSection(document.getElementById('section4')); spawnConfetti();});
+continueBtn1.addEventListener('click',()=>{
+    activateSection(document.getElementById('section3'));
+    spawnSparkle(document.getElementById('section3'));
+});
+continueBtn2.addEventListener('click',()=>{
+    activateSection(document.getElementById('section4'));
+    spawnConfetti();
+});
 
 // No button
-noBtn.addEventListener('click',()=>{responseDiv.textContent="I really hope you’ll reconsider 😅🙏"; catArtDiv.textContent="/\\_/\\  ( o_o )  > ♥ <"; moveNoButton();});
+noBtn.addEventListener('click',()=>{
+    responseDiv.textContent="I really hope you’ll reconsider 😅🙏";
+    catArtDiv.textContent="/\\_/\\  ( o_o )  > ♥ <";
+    moveNoButton();
+});
 noBtn.addEventListener('mouseover', moveNoButton);
 </script>
 
