@@ -2,72 +2,109 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Apology Simulator</title>
+    <title>Grand Apology Simulator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@400&display=swap" rel="stylesheet">
     <style>
+        /* LUXURIOUS STYLING */
         body {
-            background: linear-gradient(135deg, #ffe6f0, #e6f7ff);
-            font-family: "Comic Sans MS", cursive, sans-serif;
-            text-align: center;
-            padding-top: 60px;
-            overflow-x: hidden;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: radial-gradient(circle at top left, #fff5e6, #ffe6d1, #f0e5d1);
+            font-family: 'Roboto', sans-serif;
+            color: #333;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            color: #bfa14a;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+            margin-bottom: 30px;
         }
 
         button {
-            padding: 12px 25px;
-            margin: 10px;
-            font-size: 1.2em;
-            border-radius: 12px;
-            border: none;
+            padding: 15px 35px;
+            margin: 15px;
+            font-size: 1.3em;
+            border-radius: 50px;
+            border: 2px solid #bfa14a;
             cursor: pointer;
-            transition: 0.3s ease;
-            position: relative;
+            font-family: 'Playfair Display', serif;
+            font-weight: bold;
+            transition: 0.4s ease;
+            box-shadow: 0 8px 15px rgba(0,0,0,0.2);
         }
 
-        #yesBtn { background-color: #90ee90; }
-        #noBtn { background-color: #ff9999; }
+        #yesBtn {
+            background: linear-gradient(135deg, #f7f1e3, #ffe6b3);
+            color: #6b4c1a;
+        }
 
-        button:hover { transform: scale(1.1); }
+        #noBtn {
+            background: linear-gradient(135deg, #ffd6d6, #ff9999);
+            color: #7a1a1a;
+        }
+
+        button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 12px 20px rgba(0,0,0,0.3);
+        }
 
         #response {
-            margin-top: 30px;
-            font-size: 1.3em;
-            min-height: 60px;
+            margin-top: 40px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            min-height: 80px;
+            text-align: center;
+            color: #5a3e1b;
         }
 
         .cat {
-            margin-top: 20px;
+            margin-top: 25px;
+            font-family: monospace;
+            font-size: 18px;
             white-space: pre;
-            font-size: 16px;
+            color: #8b5e3c;
         }
 
         .meter-container {
-            margin-top: 20px;
+            margin-top: 40px;
+            width: 60%;
         }
 
         .meter {
-            width: 80%;
-            margin: auto;
-            height: 20px;
-            background: #ddd;
-            border-radius: 20px;
+            width: 100%;
+            height: 25px;
+            background: #f3e6d1;
+            border-radius: 50px;
             overflow: hidden;
+            border: 2px solid #bfa14a;
         }
 
         .meter-fill {
             height: 100%;
             width: 0%;
-            background: linear-gradient(90deg, #ff4d6d, #90ee90);
-            transition: width 0.5s ease;
+            background: linear-gradient(90deg, #ffd700, #bfa14a);
+            transition: width 0.6s ease-in-out;
         }
 
         #compliment {
-            margin-top: 15px;
+            margin-top: 20px;
             font-style: italic;
-            color: #444;
+            font-size: 1.2rem;
+            color: #6b4c1a;
         }
     </style>
 </head>
 <body>
+
+    <h1>✨ The Grand Apology Simulator ✨</h1>
 
     <p><strong>Will you forgive me? Yes or No.</strong></p>
 
@@ -95,18 +132,13 @@
     const yesBtn = document.getElementById("yesBtn");
 
     let forgivenessLevel = 0;
-    let yesCount = 0; // counts the number of Yes clicks
+    let yesCount = 0; // Track Yes clicks
 
     const cats = {
         happy: `
         /\\_/\\  
        ( ^.^ ) 
         > 💖 <  
-        `,
-        dramatic: `
-        /\\_/\\  
-       ( o_o ) 
-        > 😿 <  
         `,
         crying: `
         /\\_/\\  
@@ -116,54 +148,53 @@
     };
 
     const compliments = [
-        "You radiate main character energy ✨",
-        "Your kindness could power a small city 💡",
-        "Even WiFi signals are stronger around you 📶",
-        "You are 100% certified awesome 🏆",
-        "If coolness were code, you'd be open-source perfection 💻"
+        "You radiate absolute elegance ✨",
+        "Even diamonds envy your shine 💎",
+        "Your aura is pure gold 🌟",
+        "You deserve a crown 👑",
+        "If class were code, you'd be perfection 💻"
     ];
 
     function randomCompliment() {
-        const randomIndex = Math.floor(Math.random() * compliments.length);
-        complimentDiv.textContent = compliments[randomIndex];
+        const index = Math.floor(Math.random() * compliments.length);
+        complimentDiv.textContent = compliments[index];
     }
 
-    yesBtn.addEventListener("click", function() {
+    yesBtn.addEventListener("click", () => {
         yesCount++;
         forgivenessLevel += 25;
-        if (forgivenessLevel > 100) forgivenessLevel = 100;
+        if(forgivenessLevel > 100) forgivenessLevel = 100;
 
         meterFill.style.width = forgivenessLevel + "%";
 
-        if (yesCount === 2) {
-            responseDiv.innerHTML = "🎉 Thank you! You are amazing! 💖";
+        if(yesCount === 2){
+            responseDiv.innerHTML = "🎉 Thank you! Your forgiveness is priceless! 💖";
             catArtDiv.textContent = cats.happy;
         } else {
-            responseDiv.innerHTML = "😳 Really? Are you absolutely, positively, 100% sure??";
+            responseDiv.innerHTML = "😳 Really? Are you absolutely, positively sure??";
             catArtDiv.textContent = cats.happy;
             randomCompliment();
         }
 
-        if (forgivenessLevel === 100) {
-            responseDiv.innerHTML = "🎉 YOU ARE LEGENDARY. Forgiveness Achieved. World Peace Restored.";
+        if(forgivenessLevel === 100){
+            responseDiv.innerHTML = "🌟 YOU ARE LEGENDARY. Forgiveness Achieved. World Peace Restored.";
         }
     });
 
-    noBtn.addEventListener("mouseover", function() {
-        // Make the No button run away dramatically
-        const x = Math.random() * (window.innerWidth - 100);
-        const y = Math.random() * (window.innerHeight - 100);
+    noBtn.addEventListener("mouseover", () => {
+        // Run away dramatically
+        const x = Math.random() * (window.innerWidth - 120);
+        const y = Math.random() * (window.innerHeight - 80);
         noBtn.style.position = "absolute";
         noBtn.style.left = x + "px";
         noBtn.style.top = y + "px";
     });
 
-    noBtn.addEventListener("click", function() {
-        responseDiv.innerHTML = "😭 Please forgive me, I’m truly sorry! I even brought virtual snacks and cat memes!";
+    noBtn.addEventListener("click", () => {
+        responseDiv.innerHTML = "😭 Please forgive me, I’m truly sorry! I brought the finest virtual treats!";
         catArtDiv.textContent = cats.crying;
         randomCompliment();
     });
-
 </script>
 
 </body>
