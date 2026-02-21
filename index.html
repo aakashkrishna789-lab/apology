@@ -6,14 +6,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@400&display=swap" rel="stylesheet">
 <style>
-    /* CLEAN LUXURY STYLE */
+    /* GLOBAL STYLING */
     body, html {
         margin: 0;
         padding: 0;
         font-family: 'Roboto', sans-serif;
         background: linear-gradient(135deg, #fffaf0, #f9f0e6);
         color: #3a2e1c;
-        height: 100%;
         overflow-x: hidden;
         scroll-behavior: smooth;
     }
@@ -24,16 +23,23 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        padding: 15px;
+        padding: 20px;
         text-align: center;
-        transition: all 0.5s ease;
-        box-sizing: border-box;
+        position: relative;
+        opacity: 0;
+        transform: translateY(50px);
+        transition: all 0.8s ease-out;
+    }
+
+    section.active {
+        opacity: 1;
+        transform: translateY(0);
     }
 
     h1, h2 {
         font-family: 'Playfair Display', serif;
         font-weight: 700;
-        margin-bottom: 15px;
+        margin-bottom: 20px;
         color: #bfa14a;
         text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
         font-size: 2rem;
@@ -42,7 +48,6 @@
     p {
         font-size: 1rem;
         margin-bottom: 20px;
-        line-height: 1.4;
     }
 
     button {
@@ -54,7 +59,7 @@
         cursor: pointer;
         font-family: 'Playfair Display', serif;
         font-weight: bold;
-        transition: all 0.4s ease;
+        transition: all 0.3s ease;
         background: linear-gradient(135deg, #fff5e6, #ffe6b3);
         color: #6b4c1a;
         box-shadow: 0 5px 10px rgba(0,0,0,0.15);
@@ -69,68 +74,71 @@
     }
 
     .cat {
-        margin-top: 20px;
         font-family: monospace;
         font-size: 16px;
         white-space: pre;
         color: #8b5e3c;
+        margin-top: 15px;
+        animation: float 3s ease-in-out infinite alternate;
+    }
+
+    @keyframes float {
+        0% { transform: translateY(0); }
+        100% { transform: translateY(-10px); }
+    }
+
+    .sparkle {
+        position: absolute;
+        width: 6px;
+        height: 6px;
+        background: gold;
+        border-radius: 50%;
+        opacity: 0.8;
+        animation: sparkleAnim 1.5s linear infinite;
+    }
+
+    @keyframes sparkleAnim {
+        0% { transform: translateY(0) scale(1); opacity:0.8; }
+        50% { transform: translateY(-10px) scale(1.3); opacity:1; }
+        100% { transform: translateY(0) scale(1); opacity:0.8; }
     }
 
     @media (min-width: 600px) {
-        h1, h2 {
-            font-size: 3rem;
-        }
-
-        button {
-            font-size: 1.3em;
-            padding: 15px 35px;
-        }
-
-        .cat {
-            font-size: 18px;
-        }
+        h1, h2 { font-size: 3rem; }
+        button { font-size: 1.3em; padding: 15px 35px; }
+        .cat { font-size: 18px; }
     }
 </style>
 </head>
 <body>
 
-<!-- SECTION 1: ASK FOR FORGIVENESS -->
-<section id="section1">
+<!-- SECTION 1 -->
+<section id="section1" class="active">
     <h1>Please Forgive Me</h1>
     <p>Will you forgive me? Yes or No.</p>
     <button id="yesBtn">Yes</button>
     <button id="noBtn">No</button>
     <div id="response"></div>
-    <div class="cat" id="catArt"></div>
+    <div class="cat" id="catArt">/\\_/\\  ( ^.^ )  > ♥ <</div>
 </section>
 
-<!-- SECTION 2: SUBSECTION AFTER YES -->
-<section id="section2" style="display:none;">
+<!-- SECTION 2 -->
+<section id="section2">
     <h2>Thank You</h2>
     <p>Glad we could move forward. Shall we continue?</p>
     <button id="continueBtn">Continue</button>
-    <div class="cat" id="catArt2">
-        /\\_/\\  
-       ( ^.^ ) 
-        > ♥ <  
-    </div>
+    <div class="cat" id="catArt2">/\\_/\\  ( ^.^ )  > ♥ <</div>
 </section>
 
-<!-- SECTION 3: FINAL THANK YOU -->
-<section id="section3" style="display:none;">
+<!-- SECTION 3 -->
+<section id="section3">
     <h2>All Set</h2>
     <p>Your understanding is appreciated.</p>
-    <div class="cat">
-        /\\_/\\  
-       ( ^_^ ) 
-        > ♥ <  
-    </div>
+    <div class="cat">/\\_/\\  ( ^_^ )  > ♥ <</div>
 </section>
 
 <script>
-    const section1 = document.getElementById('section1');
-    const section2 = document.getElementById('section2');
-    const section3 = document.getElementById('section3');
+    const sections = document.querySelectorAll('section');
     const yesBtn = document.getElementById('yesBtn');
     const noBtn = document.getElementById('noBtn');
     const continueBtn = document.getElementById('continueBtn');
@@ -138,6 +146,11 @@
     const catArtDiv = document.getElementById('catArt');
 
     let yesCount = 0;
+
+    function activateSection(section) {
+        sections.forEach(s => s.classList.remove('active'));
+        section.classList.add('active');
+    }
 
     function moveNoButton() {
         const maxX = window.innerWidth - noBtn.offsetWidth - 20;
@@ -149,33 +162,33 @@
         noBtn.style.top = y + 'px';
     }
 
+    function spawnSparkle(parent) {
+        const sparkle = document.createElement('div');
+        sparkle.className = 'sparkle';
+        sparkle.style.left = Math.random() * 80 + '%';
+        sparkle.style.top = Math.random() * 80 + '%';
+        parent.appendChild(sparkle);
+        setTimeout(() => parent.removeChild(sparkle), 1500);
+    }
+
     yesBtn.addEventListener('click', () => {
         yesCount++;
-        if(yesCount === 2){
-            section1.style.display = 'none';
-            section2.style.display = 'flex';
+        if (yesCount === 2) {
+            activateSection(document.getElementById('section2'));
         } else {
             responseDiv.textContent = "Are you sure?";
-            catArtDiv.textContent = `
-            /\\_/\\  
-           ( ^.^ ) 
-            > ♥ <  
-            `;
+            catArtDiv.textContent = "/\\_/\\  ( ^.^ )  > ♥ <";
+            spawnSparkle(document.getElementById('section1'));
         }
     });
 
     continueBtn.addEventListener('click', () => {
-        section2.style.display = 'none';
-        section3.style.display = 'flex';
+        activateSection(document.getElementById('section3'));
     });
 
     noBtn.addEventListener('click', () => {
         responseDiv.textContent = "I really hope you’ll reconsider!";
-        catArtDiv.textContent = `
-        /\\_/\\  
-       ( o_o ) 
-        > ♥ <  
-        `;
+        catArtDiv.textContent = "/\\_/\\  ( o_o )  > ♥ <";
         moveNoButton();
     });
 
