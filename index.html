@@ -41,60 +41,77 @@ section.active {
 h1, h2 {
     font-family: 'Playfair Display', serif;
     font-weight: 700;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
     color: #bfa14a;
-    text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 p {
     font-size: 1rem;
-    margin-bottom: 20px;
-    line-height: 1.4;
+    margin-bottom: 25px;
+    line-height: 1.5;
 }
 
 button {
-    padding: 15px 30px;
-    margin: 10px;
+    padding: 15px 35px;
+    margin: 15px;
     font-size: 1.2em;
     border-radius: 50px;
     border: 2px solid #bfa14a;
     cursor: pointer;
     font-family: 'Playfair Display', serif;
     font-weight: bold;
-    transition: all 0.3s ease;
+    transition: all 0.4s ease;
     background: linear-gradient(135deg, #fff5e6, #ffe6b3);
     color: #6b4c1a;
-    box-shadow: 0 5px 12px rgba(0,0,0,0.15);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.15);
     position: relative;
     max-width: 80%;
     word-wrap: break-word;
 }
 
 button:hover {
-    transform: scale(1.05);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+    transform: scale(1.08);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+    animation: glow 1s infinite alternate;
+}
+
+@keyframes glow {
+    from { box-shadow: 0 10px 20px rgba(255,215,0,0.5); }
+    to { box-shadow: 0 15px 30px rgba(255,223,0,0.8); }
 }
 
 .cat {
     font-family: monospace;
-    font-size: 16px;
+    font-size: 18px;
     white-space: pre;
     color: #8b5e3c;
-    margin-top: 15px;
-    animation: float 3s ease-in-out infinite alternate;
+    margin-top: 20px;
+    animation: float 3s ease-in-out infinite alternate, glowCat 2s ease-in-out infinite alternate;
 }
 
 @keyframes float {
     0% { transform: translateY(0); }
-    100% { transform: translateY(-10px); }
+    100% { transform: translateY(-12px); }
+}
+
+@keyframes glowCat {
+    0% { text-shadow: 0 0 2px #ffd700; }
+    50% { text-shadow: 0 0 8px #ffeb99; }
+    100% { text-shadow: 0 0 2px #ffd700; }
+}
+
+.sparkle, .confettiParticle {
+    position: absolute;
+    border-radius: 50%;
 }
 
 .sparkle {
-    position: absolute;
     width: 6px;
     height: 6px;
     background: gold;
-    border-radius: 50%;
     opacity: 0.8;
     animation: sparkleAnim 1.5s linear infinite;
 }
@@ -105,14 +122,10 @@ button:hover {
     100% { transform: translateY(0) scale(1); opacity:0.8; }
 }
 
-.confetti {
-    position: fixed;
+.confettiParticle {
     width: 8px;
     height: 8px;
-    background: gold;
-    top: 0;
-    animation: confettiFall 3s linear infinite;
-    border-radius: 50%;
+    animation: confettiFall 4s linear infinite;
 }
 
 @keyframes confettiFall {
@@ -120,18 +133,25 @@ button:hover {
     100% { transform: translateY(100vh) rotate(360deg); }
 }
 
+.backgroundCats {
+    position: absolute;
+    font-family: monospace;
+    font-size: 24px;
+    opacity: 0.15;
+    animation: float 5s ease-in-out infinite alternate;
+    pointer-events: none;
+}
+
 @media (min-width: 600px) {
     h1, h2 { font-size: 3rem; }
-    button { font-size: 1.3em; padding: 15px 35px; }
-    .cat { font-size: 18px; }
+    button { font-size: 1.3em; padding: 18px 40px; }
+    .cat { font-size: 20px; }
 }
 </style>
 </head>
 <body>
 
-<!-- ----------------------- -->
-<!-- SECTION 1: INTRO        -->
-<!-- ----------------------- -->
+<!-- SECTION 1 -->
 <section id="section1" class="active">
     <h1>Please Forgive Me</h1>
     <p>Will you forgive me? Yes or No.</p>
@@ -141,29 +161,23 @@ button:hover {
     <div class="cat" id="catArt">/\\_/\\  ( ^.^ )  > ♥ <</div>
 </section>
 
-<!-- ----------------------- -->
-<!-- SECTION 2: SECOND CHANCE -->
-<!-- ----------------------- -->
+<!-- SECTION 2 -->
 <section id="section2">
     <h2>Thank You</h2>
-    <p>I'm glad we are moving forward. Ready for the next step?</p>
+    <p>Glad we are moving forward. Ready for the next step?</p>
     <button id="continueBtn1">Continue</button>
     <div class="cat">/\\_/\\  ( ^.^ )  > ♥ <</div>
 </section>
 
-<!-- ----------------------- -->
-<!-- SECTION 3: REFLECTION   -->
-<!-- ----------------------- -->
+<!-- SECTION 3 -->
 <section id="section3">
     <h2>A Little Reflection</h2>
-    <p>Even small gestures can mean a lot. Shall we continue?</p>
+    <p>Even small gestures mean a lot. Shall we continue?</p>
     <button id="continueBtn2">Continue</button>
     <div class="cat">/\\_/\\  ( -.- )  > ♥ <</div>
 </section>
 
-<!-- ----------------------- -->
-<!-- SECTION 4: FINAL THANKS -->
-<!-- ----------------------- -->
+<!-- SECTION 4: GRAND THANKS -->
 <section id="section4">
     <h2>All Set</h2>
     <p>Thank you for your patience and understanding!</p>
@@ -171,9 +185,6 @@ button:hover {
 </section>
 
 <script>
-// -----------------------
-// JS FOR CINEMATIC FLOW
-// -----------------------
 const sections = document.querySelectorAll('section');
 const yesBtn = document.getElementById('yesBtn');
 const noBtn = document.getElementById('noBtn');
@@ -184,7 +195,7 @@ const catArtDiv = document.getElementById('catArt');
 
 let yesCount = 0;
 
-// Activate section
+// Activate section with smooth transition
 function activateSection(section) {
     sections.forEach(s => s.classList.remove('active'));
     section.classList.add('active');
@@ -201,7 +212,7 @@ function moveNoButton() {
     noBtn.style.top = y + 'px';
 }
 
-// Sparkle animation
+// Spawn sparkle
 function spawnSparkle(parent) {
     const sparkle = document.createElement('div');
     sparkle.className = 'sparkle';
@@ -211,16 +222,27 @@ function spawnSparkle(parent) {
     setTimeout(() => parent.removeChild(sparkle), 1500);
 }
 
-// Confetti
+// Spawn confetti particles
 function spawnConfetti() {
-    for(let i=0; i<50; i++){
-        const confetti = document.createElement('div');
-        confetti.className = 'confetti';
-        confetti.style.left = Math.random() * 100 + '%';
-        confetti.style.background = ['gold','#ffd700','#fffacd','#f0e68c'][Math.floor(Math.random()*4)];
-        document.body.appendChild(confetti);
-        setTimeout(() => document.body.removeChild(confetti), 5000);
+    for(let i=0;i<60;i++){
+        const conf = document.createElement('div');
+        conf.className = 'confettiParticle';
+        conf.style.left = Math.random() * 100 + '%';
+        conf.style.background = ['gold','#ffd700','#fffacd','#f0e68c'][Math.floor(Math.random()*4)];
+        conf.style.animationDuration = 2 + Math.random()*3 + 's';
+        document.body.appendChild(conf);
+        setTimeout(()=>document.body.removeChild(conf),5000);
     }
+}
+
+// Floating background cats
+for(let i=0;i<15;i++){
+    const bgCat = document.createElement('div');
+    bgCat.className = 'backgroundCats';
+    bgCat.style.left = Math.random()*90+'%';
+    bgCat.style.top = Math.random()*90+'%';
+    bgCat.textContent = '/\\_/\\';
+    document.body.appendChild(bgCat);
 }
 
 // Yes button logic
@@ -247,7 +269,7 @@ continueBtn2.addEventListener('click', () => {
     spawnConfetti();
 });
 
-// No button
+// No button interaction
 noBtn.addEventListener('click', () => {
     responseDiv.textContent = "I really hope you’ll reconsider!";
     catArtDiv.textContent = "/\\_/\\  ( o_o )  > ♥ <";
