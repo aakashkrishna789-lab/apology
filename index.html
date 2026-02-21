@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dramatic Apology Simulator 😿</title>
+    <style>
+        body {
+            background: linear-gradient(135deg, #ffe6f0, #e6f7ff);
+            font-family: "Comic Sans MS", cursive, sans-serif;
+            text-align: center;
+            padding-top: 50px;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            color: #ff4d6d;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin: 10px;
+            font-size: 1.2em;
+            border-radius: 10px;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s ease;
+        }
+
+        #yesBtn {
+            background-color: #90ee90;
+        }
+
+        #noBtn {
+            background-color: #ff9999;
+        }
+
+        button:hover {
+            transform: scale(1.1);
+        }
+
+        #response {
+            margin-top: 30px;
+            font-size: 1.3em;
+            min-height: 50px;
+        }
+
+        .cat {
+            margin-top: 20px;
+            white-space: pre;
+            font-size: 16px;
+        }
+
+        .likes {
+            margin-top: 30px;
+            font-size: 1em;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>😿 The Dramatic Apology Simulator 😿</h1>
+    <p><strong>Will you forgive me? Yes or No.</strong></p>
+
+    <button id="yesBtn">Yes 💖</button>
+    <button id="noBtn">No 💔</button>
+
+    <div id="response"></div>
+    <div class="cat" id="catArt"></div>
+
+    <div class="likes">
+        <p>✨ Things this program loves:</p>
+        <p>🐾 Cute cats</p>
+        <p>☕ Warm coffee</p>
+        <p>🌈 Rainbows after dramatic storms</p>
+        <p>💖 Second chances</p>
+    </div>
+
+    <script>
+        const responseDiv = document.getElementById("response");
+        const catArtDiv = document.getElementById("catArt");
+
+        const dramaticCat = `
+        /\\_/\\  
+       ( o.o ) 
+        > ^ <  
+        `;
+
+        const pleadingCat = `
+        /\\_/\\  
+       ( T_T ) 
+        > 💔 <  
+        `;
+
+        document.getElementById("yesBtn").addEventListener("click", function() {
+            responseDiv.innerHTML = "😳 Really? Are you absolutely, positively, 100% sure??";
+            catArtDiv.textContent = dramaticCat;
+        });
+
+        document.getElementById("noBtn").addEventListener("click", function() {
+            responseDiv.innerHTML = "😭 Please forgive me, I’m truly sorry! I even brought virtual snacks and cat memes!";
+            catArtDiv.textContent = pleadingCat;
+        });
+    </script>
+
+</body>
+</html>
