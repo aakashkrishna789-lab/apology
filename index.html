@@ -2,46 +2,36 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Dramatic Apology Simulator 😿</title>
+    <title>Apology Simulator</title>
     <style>
         body {
             background: linear-gradient(135deg, #ffe6f0, #e6f7ff);
             font-family: "Comic Sans MS", cursive, sans-serif;
             text-align: center;
-            padding-top: 50px;
-        }
-
-        h1 {
-            font-size: 2.5em;
-            color: #ff4d6d;
+            padding-top: 60px;
+            overflow-x: hidden;
         }
 
         button {
-            padding: 10px 20px;
+            padding: 12px 25px;
             margin: 10px;
             font-size: 1.2em;
-            border-radius: 10px;
+            border-radius: 12px;
             border: none;
             cursor: pointer;
             transition: 0.3s ease;
+            position: relative;
         }
 
-        #yesBtn {
-            background-color: #90ee90;
-        }
+        #yesBtn { background-color: #90ee90; }
+        #noBtn { background-color: #ff9999; }
 
-        #noBtn {
-            background-color: #ff9999;
-        }
-
-        button:hover {
-            transform: scale(1.1);
-        }
+        button:hover { transform: scale(1.1); }
 
         #response {
             margin-top: 30px;
             font-size: 1.3em;
-            min-height: 50px;
+            min-height: 60px;
         }
 
         .cat {
@@ -55,11 +45,36 @@
             font-size: 1em;
             color: #555;
         }
+
+        .meter-container {
+            margin-top: 20px;
+        }
+
+        .meter {
+            width: 80%;
+            margin: auto;
+            height: 20px;
+            background: #ddd;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .meter-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #ff4d6d, #90ee90);
+            transition: width 0.5s ease;
+        }
+
+        #compliment {
+            margin-top: 15px;
+            font-style: italic;
+            color: #444;
+        }
     </style>
 </head>
 <body>
 
-    <h1>😿 The Dramatic Apology Simulator 😿</h1>
     <p><strong>Will you forgive me? Yes or No.</strong></p>
 
     <button id="yesBtn">Yes 💖</button>
@@ -68,40 +83,96 @@
     <div id="response"></div>
     <div class="cat" id="catArt"></div>
 
-    <div class="likes">
-        <p>✨ Things this program loves:</p>
-        <p>🐾 Cute cats</p>
-        <p>☕ Warm coffee</p>
-        <p>🌈 Rainbows after dramatic storms</p>
-        <p>💖 Second chances</p>
+    <div class="meter-container">
+        <p>Forgiveness Meter 💞</p>
+        <div class="meter">
+            <div class="meter-fill" id="meterFill"></div>
+        </div>
     </div>
 
-    <script>
-        const responseDiv = document.getElementById("response");
-        const catArtDiv = document.getElementById("catArt");
+    <div id="compliment"></div>
 
-        const dramaticCat = `
+    <div class="likes">
+        <p>✨ This program appreciates:</p>
+        <p>🐾 Tiny toe beans</p>
+        <p>🌈 Unexpected happiness</p>
+        <p>🍪 Cookies at midnight</p>
+        <p>🎶 Songs that hit different</p>
+        <p>📚 Late night coding sessions</p>
+        <p>💖 Second chances</p>
+        <p>🌸 Kind humans (especially you)</p>
+    </div>
+
+<script>
+    const responseDiv = document.getElementById("response");
+    const catArtDiv = document.getElementById("catArt");
+    const meterFill = document.getElementById("meterFill");
+    const complimentDiv = document.getElementById("compliment");
+    const noBtn = document.getElementById("noBtn");
+
+    let forgivenessLevel = 0;
+
+    const cats = {
+        happy: `
         /\\_/\\  
-       ( o.o ) 
-        > ^ <  
-        `;
-
-        const pleadingCat = `
+       ( ^.^ ) 
+        > 💖 <  
+        `,
+        dramatic: `
+        /\\_/\\  
+       ( o_o ) 
+        > 😿 <  
+        `,
+        crying: `
         /\\_/\\  
        ( T_T ) 
         > 💔 <  
-        `;
+        `
+    };
 
-        document.getElementById("yesBtn").addEventListener("click", function() {
-            responseDiv.innerHTML = "😳 Really? Are you absolutely, positively, 100% sure??";
-            catArtDiv.textContent = dramaticCat;
-        });
+    const compliments = [
+        "You radiate main character energy ✨",
+        "Your kindness could power a small city 💡",
+        "Even WiFi signals are stronger around you 📶",
+        "You are 100% certified awesome 🏆",
+        "If coolness were code, you'd be open-source perfection 💻"
+    ];
 
-        document.getElementById("noBtn").addEventListener("click", function() {
-            responseDiv.innerHTML = "😭 Please forgive me, I’m truly sorry! I even brought virtual snacks and cat memes!";
-            catArtDiv.textContent = pleadingCat;
-        });
-    </script>
+    function randomCompliment() {
+        const randomIndex = Math.floor(Math.random() * compliments.length);
+        complimentDiv.textContent = compliments[randomIndex];
+    }
+
+    document.getElementById("yesBtn").addEventListener("click", function() {
+        forgivenessLevel += 25;
+        if (forgivenessLevel > 100) forgivenessLevel = 100;
+
+        meterFill.style.width = forgivenessLevel + "%";
+        responseDiv.innerHTML = "😳 Really? Are you absolutely, positively, 100% sure??";
+        catArtDiv.textContent = cats.happy;
+        randomCompliment();
+
+        if (forgivenessLevel === 100) {
+            responseDiv.innerHTML = "🎉 YOU ARE LEGENDARY. Forgiveness Achieved. World Peace Restored.";
+        }
+    });
+
+    document.getElementById("noBtn").addEventListener("mouseover", function() {
+        // Make the No button run away dramatically
+        const x = Math.random() * (window.innerWidth - 100);
+        const y = Math.random() * (window.innerHeight - 100);
+        noBtn.style.position = "absolute";
+        noBtn.style.left = x + "px";
+        noBtn.style.top = y + "px";
+    });
+
+    document.getElementById("noBtn").addEventListener("click", function() {
+        responseDiv.innerHTML = "😭 Please forgive me, I’m truly sorry! I even brought virtual snacks and cat memes!";
+        catArtDiv.textContent = cats.crying;
+        randomCompliment();
+    });
+
+</script>
 
 </body>
 </html>
