@@ -7,77 +7,62 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@400&display=swap" rel="stylesheet">
 <style>
 body,html{margin:0;padding:0;font-family:'Roboto',sans-serif;overflow-x:hidden;scroll-behavior:smooth;background:linear-gradient(135deg,#fffaf0,#f9f0e6);}
-section{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:20px;position:relative;transition:all .5s;}
-h1,h2{font-family:'Playfair Display',serif;font-weight:700;color:#bfa14a;text-shadow:2px 2px 10px rgba(0,0,0,.15);}
-p{margin:20px;font-size:1rem;}
-button{padding:12px 30px;border-radius:50px;border:2px solid #bfa14a;font-family:'Playfair Display',serif;font-weight:700;background:linear-gradient(135deg,#fff5e6,#ffe6b3);color:#6b4c1a;cursor:pointer;margin:10px;transition:.3s;}
-button:hover{transform:scale(1.08);box-shadow:0 10px 20px rgba(255,215,0,.5);animation:glow 1s infinite alternate;}
+section{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:20px;position:relative;transition:transform .8s ease,opacity .8s ease;}
+h1,h2{font-family:'Playfair Display',serif;font-weight:700;color:#bfa14a;text-shadow:2px 2px 10px rgba(0,0,0,.15);letter-spacing:1px;}
+p{font-size:1.1rem;margin:20px 0;line-height:1.5;}
+button{padding:16px 40px;border-radius:50px;border:2px solid #bfa14a;font-family:'Playfair Display',serif;font-weight:bold;font-size:1.2rem;background:linear-gradient(135deg,#fff5e6,#ffe6b3);color:#6b4c1a;cursor:pointer;box-shadow:0 5px 15px rgba(0,0,0,.15);margin:12px;transition:.4s all;}
+button:hover{transform:scale(1.08);box-shadow:0 12px 25px rgba(255,215,0,.6);animation:glow 1s infinite alternate;}
 @keyframes glow{0%{box-shadow:0 10px 20px rgba(255,215,0,.5);}100%{box-shadow:0 15px 30px rgba(255,223,0,.8);}}
-.cat{font-family:monospace;font-size:18px;margin-top:20px;animation:float 3s ease-in-out infinite,glowCat 2s ease-in-out infinite;}
+.cat{font-family:monospace;font-size:20px;margin-top:20px;animation:float 3s ease-in-out infinite alternate,glowCat 2s ease-in-out infinite alternate;}
 @keyframes float{0%{transform:translateY(0);}100%{transform:translateY(-12px);}}
 @keyframes glowCat{0%,100%{text-shadow:0 0 2px #ffd700;}50%{text-shadow:0 0 10px #ffeb99;}}
-.sparkle,.confetti,.bgCat{position:absolute;border-radius:50%;}
-.sparkle{width:6px;height:6px;background:gold;opacity:.8;animation:spark 1.5s linear infinite;}
-@keyframes spark{0%,100%{transform:translateY(0) scale(1);opacity:.8;}50%{transform:translateY(-10px) scale(1.3);opacity:1;}}
-.confetti{width:8px;height:8px;animation:fall 4s linear infinite;}
-@keyframes fall{0%{transform:translateY(0) rotate(0deg);}100%{transform:translateY(100vh) rotate(360deg);}}
-.bgCat{font-family:monospace;font-size:22px;opacity:.15;pointer-events:none;animation:float 6s ease-in-out infinite;}
-@media(min-width:600px){h1,h2{font-size:2.5rem;}button{font-size:1.2rem;padding:16px 36px;}.cat{font-size:20px;}}
+.sparkle,.confettiParticle,.backgroundCat{position:absolute;border-radius:50%;}
+.sparkle{width:6px;height:6px;background:gold;opacity:.8;animation:sparkleAnim 1.5s linear infinite;}
+@keyframes sparkleAnim{0%{transform:translateY(0) scale(1);opacity:.8;}50%{transform:translateY(-10px) scale(1.3);opacity:1;}100%{transform:translateY(0) scale(1);opacity:.8;}}
+.confettiParticle{width:8px;height:8px;animation:confettiFall 4s linear infinite;}
+@keyframes confettiFall{0%{transform:translateY(0) rotate(0deg);}100%{transform:translateY(100vh) rotate(360deg);}}
+.backgroundCat{font-family:monospace;font-size:24px;opacity:.15;pointer-events:none;animation:float 6s ease-in-out infinite alternate;}
+@media(min-width:600px){h1,h2{font-size:3rem;}button{font-size:1.3rem;padding:18px 45px;}.cat{font-size:22px;}}
 </style>
 </head>
 <body>
-
-<section id="sec1" class="active">
+<section id="section1" class="active">
 <h1>Please Forgive Me 🙏</h1>
-<p id="q">Will you forgive me? Yes ✅ or No ❌</p>
-<button id="yes">Yes ✅</button>
-<button id="no">No ❌</button>
-<div class="cat" id="cat">/\_/\ (^.^) > ♥ <</div>
-<div id="resp"></div>
+<p>Will you forgive me? Yes ✅ or No ❌</p>
+<button id="yesBtn">Yes ✅</button>
+<button id="noBtn">No ❌</button>
+<div id="response"></div>
+<div class="cat" id="catArt">/\_/\ ( ^.^ ) > ♥ <</div>
 </section>
-
-<section id="sec2">
+<section id="section2">
 <h2>Yay! 🥳</h2>
 <p>Next step! ✨</p>
-<button id="c1">Continue ➡️</button>
-<div class="cat">/\_/\ (^.^) > ♥ <</div>
+<button id="continueBtn1">Continue ➡️</button>
+<div class="cat">/\_/\ ( ^.^ ) > ♥ <</div>
 </section>
-
-<section id="sec3">
+<section id="section3">
 <h2>Almost There! 😎</h2>
 <p>Small gestures matter 💛 Continue?</p>
-<button id="c2">Continue ➡️</button>
-<div class="cat">/\_/\ (-.-) > ♥ <</div>
+<button id="continueBtn2">Continue ➡️</button>
+<div class="cat">/\_/\ ( -.- ) > ♥ <</div>
 </section>
-
-<section id="sec4">
+<section id="section4">
 <h2>Thank You So Muchhh 🎉✨</h2>
 <p>You’re awesome! Thanks a ton 😻💖</p>
-<div class="cat">/\_/\ (^_^) > ♥ <</div>
+<div class="cat">/\_/\ ( ^_^ ) > ♥ <</div>
 </section>
-
-<audio id="click" src="https://freesound.org/data/previews/256/256113_3263906-lq.mp3"></audio>
-<audio id="sparkleS" src="https://freesound.org/data/previews/146/146725_2615111-lq.mp3"></audio>
-<audio id="conf" src="https://freesound.org/data/previews/220/220173_4104083-lq.mp3"></audio>
-
 <script>
-const secs=[...document.querySelectorAll('section')];
-const yes=document.getElementById('yes'),no=document.getElementById('no'),c1=document.getElementById('c1'),c2=document.getElementById('c2');
-const resp=document.getElementById('resp'),cat=document.getElementById('cat');
-const click=document.getElementById('click'),spark=document.getElementById('sparkleS'),conf=document.getElementById('conf');
-let yesC=0;
-
-function show(sec){secs.forEach(s=>s.classList.remove('active'));sec.classList.add('active');window.scrollTo({top:0,behavior:'smooth'});click.play();}
-function moveNo(){const x=Math.random()*(window.innerWidth-no.offsetWidth-20),y=Math.random()*(window.innerHeight-no.offsetHeight-20);no.style.position='absolute';no.style.left=x+'px';no.style.top=y+'px';click.play();}
-function sparkE(p){const s=document.createElement('div');s.className='sparkle';s.style.left=Math.random()*80+'%';s.style.top=Math.random()*80+'%';p.appendChild(s);spark.play();setTimeout(()=>p.removeChild(s),1500);}
-function confE(){for(let i=0;i<30;i++){const cE=document.createElement('div');cE.className='confetti';cE.style.left=Math.random()*100+'%';cE.style.background=['gold','#ffd700','#fffacd','#f0e68c'][Math.floor(Math.random()*4)];document.body.appendChild(cE);}conf.play();setTimeout(()=>document.querySelectorAll('.confetti').forEach(c=>c.remove()),4000);}
-for(let i=0;i<12;i++){const b=document.createElement('div');b.className='bgCat';b.style.left=Math.random()*90+'%';b.style.top=Math.random()*90+'%';b.textContent='/\\_/\\';document.body.appendChild(b);}
-
-yes.onclick=()=>{click.play();yesC++;if(yesC>=2){show(document.getElementById('sec2'));sparkE(document.getElementById('sec2'));}else{resp.textContent="Are you sure? 🤔";cat.textContent="/\\_/\\ (^.^) > ♥ <";sparkE(document.getElementById('sec1'));}};
-c1.onclick=()=>{show(document.getElementById('sec3'));sparkE(document.getElementById('sec3'));};
-c2.onclick=()=>{show(document.getElementById('sec4'));confE();};
-no.onclick=()=>{resp.textContent="I really hope you’ll reconsider 😅🙏";cat.textContent="/\\_/\\ (o_o) > ♥ <";moveNo();};
-no.onmouseover=moveNo;
+const s=document.querySelectorAll('section'),y=document.getElementById('yesBtn'),n=document.getElementById('noBtn'),c1=document.getElementById('continueBtn1'),c2=document.getElementById('continueBtn2'),r=document.getElementById('response'),cat=document.getElementById('catArt');let count=0;
+function activate(sec){s.forEach(x=>x.classList.remove('active'));sec.classList.add('active');window.scrollTo({top:0,behavior:'smooth'});}
+function moveNo(){const w=window.innerWidth-n.offsetWidth-20,h=window.innerHeight-n.offsetHeight-20;n.style.position='absolute';n.style.left=Math.random()*w+'px';n.style.top=Math.random()*h+'px';}
+function sparkle(p){const sp=document.createElement('div');sp.className='sparkle';sp.style.left=Math.random()*80+'%';sp.style.top=Math.random()*80+'%';p.appendChild(sp);setTimeout(()=>p.removeChild(sp),1500);}
+function confetti(){for(let i=0;i<60;i++){const f=document.createElement('div');f.className='confettiParticle';f.style.left=Math.random()*100+'%';f.style.background=['gold','#ffd700','#fffacd','#f0e68c'][Math.floor(Math.random()*4)];f.style.animationDuration=(2+Math.random()*3)+'s';document.body.appendChild(f);setTimeout(()=>document.body.removeChild(f),5000);}}
+for(let i=0;i<20;i++){const b=document.createElement('div');b.className='backgroundCat';b.style.left=Math.random()*90+'%';b.style.top=Math.random()*90+'%';b.textContent='/\\_/\\';document.body.appendChild(b);}
+y.addEventListener('click',()=>{count++;if(count===2){activate(document.getElementById('section2'));sparkle(document.getElementById('section2'));}else{r.textContent="Are you sure? 🤔";cat.textContent="/\\_/\\ ( ^.^ ) > ♥ <";sparkle(document.getElementById('section1'));}});
+c1.addEventListener('click',()=>{activate(document.getElementById('section3'));sparkle(document.getElementById('section3'));});
+c2.addEventListener('click',()=>{activate(document.getElementById('section4'));confetti();});
+n.addEventListener('click',()=>{r.textContent="I really hope you’ll reconsider 😅🙏";cat.textContent="/\\_/\\ ( o_o ) > ♥ <";moveNo();});
+n.addEventListener('mouseover',moveNo);
 </script>
 </body>
 </html>
