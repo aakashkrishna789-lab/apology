@@ -6,113 +6,132 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@400&display=swap" rel="stylesheet">
 <style>
-    /* GLOBAL STYLING */
-    body, html {
-        margin: 0;
-        padding: 0;
-        font-family: 'Roboto', sans-serif;
-        background: linear-gradient(135deg, #fffaf0, #f9f0e6);
-        color: #3a2e1c;
-        overflow-x: hidden;
-        scroll-behavior: smooth;
-    }
+/* ----------------------- */
+/* GLOBAL LUXURY STYLING   */
+/* ----------------------- */
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(135deg, #fffaf0, #f9f0e6);
+    color: #3a2e1c;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+}
 
-    section {
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        padding: 20px;
-        text-align: center;
-        position: relative;
-        opacity: 0;
-        transform: translateY(50px);
-        transition: all 0.8s ease-out;
-    }
+section {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    text-align: center;
+    position: relative;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 1s ease-out;
+}
 
-    section.active {
-        opacity: 1;
-        transform: translateY(0);
-    }
+section.active {
+    opacity: 1;
+    transform: translateY(0);
+}
 
-    h1, h2 {
-        font-family: 'Playfair Display', serif;
-        font-weight: 700;
-        margin-bottom: 20px;
-        color: #bfa14a;
-        text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
-        font-size: 2rem;
-    }
+h1, h2 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: #bfa14a;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+}
 
-    p {
-        font-size: 1rem;
-        margin-bottom: 20px;
-    }
+p {
+    font-size: 1rem;
+    margin-bottom: 20px;
+    line-height: 1.4;
+}
 
-    button {
-        padding: 12px 25px;
-        margin: 10px;
-        font-size: 1.1em;
-        border-radius: 50px;
-        border: 2px solid #bfa14a;
-        cursor: pointer;
-        font-family: 'Playfair Display', serif;
-        font-weight: bold;
-        transition: all 0.3s ease;
-        background: linear-gradient(135deg, #fff5e6, #ffe6b3);
-        color: #6b4c1a;
-        box-shadow: 0 5px 10px rgba(0,0,0,0.15);
-        position: relative;
-        max-width: 80%;
-        word-wrap: break-word;
-    }
+button {
+    padding: 15px 30px;
+    margin: 10px;
+    font-size: 1.2em;
+    border-radius: 50px;
+    border: 2px solid #bfa14a;
+    cursor: pointer;
+    font-family: 'Playfair Display', serif;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    background: linear-gradient(135deg, #fff5e6, #ffe6b3);
+    color: #6b4c1a;
+    box-shadow: 0 5px 12px rgba(0,0,0,0.15);
+    position: relative;
+    max-width: 80%;
+    word-wrap: break-word;
+}
 
-    button:hover {
-        transform: scale(1.05);
-        box-shadow: 0 8px 15px rgba(0,0,0,0.2);
-    }
+button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+}
 
-    .cat {
-        font-family: monospace;
-        font-size: 16px;
-        white-space: pre;
-        color: #8b5e3c;
-        margin-top: 15px;
-        animation: float 3s ease-in-out infinite alternate;
-    }
+.cat {
+    font-family: monospace;
+    font-size: 16px;
+    white-space: pre;
+    color: #8b5e3c;
+    margin-top: 15px;
+    animation: float 3s ease-in-out infinite alternate;
+}
 
-    @keyframes float {
-        0% { transform: translateY(0); }
-        100% { transform: translateY(-10px); }
-    }
+@keyframes float {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-10px); }
+}
 
-    .sparkle {
-        position: absolute;
-        width: 6px;
-        height: 6px;
-        background: gold;
-        border-radius: 50%;
-        opacity: 0.8;
-        animation: sparkleAnim 1.5s linear infinite;
-    }
+.sparkle {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background: gold;
+    border-radius: 50%;
+    opacity: 0.8;
+    animation: sparkleAnim 1.5s linear infinite;
+}
 
-    @keyframes sparkleAnim {
-        0% { transform: translateY(0) scale(1); opacity:0.8; }
-        50% { transform: translateY(-10px) scale(1.3); opacity:1; }
-        100% { transform: translateY(0) scale(1); opacity:0.8; }
-    }
+@keyframes sparkleAnim {
+    0% { transform: translateY(0) scale(1); opacity:0.8; }
+    50% { transform: translateY(-10px) scale(1.3); opacity:1; }
+    100% { transform: translateY(0) scale(1); opacity:0.8; }
+}
 
-    @media (min-width: 600px) {
-        h1, h2 { font-size: 3rem; }
-        button { font-size: 1.3em; padding: 15px 35px; }
-        .cat { font-size: 18px; }
-    }
+.confetti {
+    position: fixed;
+    width: 8px;
+    height: 8px;
+    background: gold;
+    top: 0;
+    animation: confettiFall 3s linear infinite;
+    border-radius: 50%;
+}
+
+@keyframes confettiFall {
+    0% { transform: translateY(0) rotate(0deg); }
+    100% { transform: translateY(100vh) rotate(360deg); }
+}
+
+@media (min-width: 600px) {
+    h1, h2 { font-size: 3rem; }
+    button { font-size: 1.3em; padding: 15px 35px; }
+    .cat { font-size: 18px; }
+}
 </style>
 </head>
 <body>
 
-<!-- SECTION 1 -->
+<!-- ----------------------- -->
+<!-- SECTION 1: INTRO        -->
+<!-- ----------------------- -->
 <section id="section1" class="active">
     <h1>Please Forgive Me</h1>
     <p>Will you forgive me? Yes or No.</p>
@@ -122,77 +141,119 @@
     <div class="cat" id="catArt">/\\_/\\  ( ^.^ )  > ♥ <</div>
 </section>
 
-<!-- SECTION 2 -->
+<!-- ----------------------- -->
+<!-- SECTION 2: SECOND CHANCE -->
+<!-- ----------------------- -->
 <section id="section2">
     <h2>Thank You</h2>
-    <p>Glad we could move forward. Shall we continue?</p>
-    <button id="continueBtn">Continue</button>
-    <div class="cat" id="catArt2">/\\_/\\  ( ^.^ )  > ♥ <</div>
+    <p>I'm glad we are moving forward. Ready for the next step?</p>
+    <button id="continueBtn1">Continue</button>
+    <div class="cat">/\\_/\\  ( ^.^ )  > ♥ <</div>
 </section>
 
-<!-- SECTION 3 -->
+<!-- ----------------------- -->
+<!-- SECTION 3: REFLECTION   -->
+<!-- ----------------------- -->
 <section id="section3">
+    <h2>A Little Reflection</h2>
+    <p>Even small gestures can mean a lot. Shall we continue?</p>
+    <button id="continueBtn2">Continue</button>
+    <div class="cat">/\\_/\\  ( -.- )  > ♥ <</div>
+</section>
+
+<!-- ----------------------- -->
+<!-- SECTION 4: FINAL THANKS -->
+<!-- ----------------------- -->
+<section id="section4">
     <h2>All Set</h2>
-    <p>Your understanding is appreciated.</p>
+    <p>Thank you for your patience and understanding!</p>
     <div class="cat">/\\_/\\  ( ^_^ )  > ♥ <</div>
 </section>
 
 <script>
-    const sections = document.querySelectorAll('section');
-    const yesBtn = document.getElementById('yesBtn');
-    const noBtn = document.getElementById('noBtn');
-    const continueBtn = document.getElementById('continueBtn');
-    const responseDiv = document.getElementById('response');
-    const catArtDiv = document.getElementById('catArt');
+// -----------------------
+// JS FOR CINEMATIC FLOW
+// -----------------------
+const sections = document.querySelectorAll('section');
+const yesBtn = document.getElementById('yesBtn');
+const noBtn = document.getElementById('noBtn');
+const continueBtn1 = document.getElementById('continueBtn1');
+const continueBtn2 = document.getElementById('continueBtn2');
+const responseDiv = document.getElementById('response');
+const catArtDiv = document.getElementById('catArt');
 
-    let yesCount = 0;
+let yesCount = 0;
 
-    function activateSection(section) {
-        sections.forEach(s => s.classList.remove('active'));
-        section.classList.add('active');
+// Activate section
+function activateSection(section) {
+    sections.forEach(s => s.classList.remove('active'));
+    section.classList.add('active');
+}
+
+// Move No button randomly
+function moveNoButton() {
+    const maxX = window.innerWidth - noBtn.offsetWidth - 20;
+    const maxY = window.innerHeight - noBtn.offsetHeight - 20;
+    const x = Math.random() * maxX;
+    const y = Math.random() * maxY;
+    noBtn.style.position = 'absolute';
+    noBtn.style.left = x + 'px';
+    noBtn.style.top = y + 'px';
+}
+
+// Sparkle animation
+function spawnSparkle(parent) {
+    const sparkle = document.createElement('div');
+    sparkle.className = 'sparkle';
+    sparkle.style.left = Math.random() * 80 + '%';
+    sparkle.style.top = Math.random() * 80 + '%';
+    parent.appendChild(sparkle);
+    setTimeout(() => parent.removeChild(sparkle), 1500);
+}
+
+// Confetti
+function spawnConfetti() {
+    for(let i=0; i<50; i++){
+        const confetti = document.createElement('div');
+        confetti.className = 'confetti';
+        confetti.style.left = Math.random() * 100 + '%';
+        confetti.style.background = ['gold','#ffd700','#fffacd','#f0e68c'][Math.floor(Math.random()*4)];
+        document.body.appendChild(confetti);
+        setTimeout(() => document.body.removeChild(confetti), 5000);
     }
+}
 
-    function moveNoButton() {
-        const maxX = window.innerWidth - noBtn.offsetWidth - 20;
-        const maxY = window.innerHeight - noBtn.offsetHeight - 20;
-        const x = Math.random() * maxX;
-        const y = Math.random() * maxY;
-        noBtn.style.position = 'absolute';
-        noBtn.style.left = x + 'px';
-        noBtn.style.top = y + 'px';
+// Yes button logic
+yesBtn.addEventListener('click', () => {
+    yesCount++;
+    if (yesCount === 2) {
+        activateSection(document.getElementById('section2'));
+        spawnSparkle(document.getElementById('section2'));
+    } else {
+        responseDiv.textContent = "Are you sure?";
+        catArtDiv.textContent = "/\\_/\\  ( ^.^ )  > ♥ <";
+        spawnSparkle(document.getElementById('section1'));
     }
+});
 
-    function spawnSparkle(parent) {
-        const sparkle = document.createElement('div');
-        sparkle.className = 'sparkle';
-        sparkle.style.left = Math.random() * 80 + '%';
-        sparkle.style.top = Math.random() * 80 + '%';
-        parent.appendChild(sparkle);
-        setTimeout(() => parent.removeChild(sparkle), 1500);
-    }
+// Continue buttons
+continueBtn1.addEventListener('click', () => {
+    activateSection(document.getElementById('section3'));
+    spawnSparkle(document.getElementById('section3'));
+});
 
-    yesBtn.addEventListener('click', () => {
-        yesCount++;
-        if (yesCount === 2) {
-            activateSection(document.getElementById('section2'));
-        } else {
-            responseDiv.textContent = "Are you sure?";
-            catArtDiv.textContent = "/\\_/\\  ( ^.^ )  > ♥ <";
-            spawnSparkle(document.getElementById('section1'));
-        }
-    });
+continueBtn2.addEventListener('click', () => {
+    activateSection(document.getElementById('section4'));
+    spawnConfetti();
+});
 
-    continueBtn.addEventListener('click', () => {
-        activateSection(document.getElementById('section3'));
-    });
-
-    noBtn.addEventListener('click', () => {
-        responseDiv.textContent = "I really hope you’ll reconsider!";
-        catArtDiv.textContent = "/\\_/\\  ( o_o )  > ♥ <";
-        moveNoButton();
-    });
-
-    noBtn.addEventListener('mouseover', moveNoButton);
+// No button
+noBtn.addEventListener('click', () => {
+    responseDiv.textContent = "I really hope you’ll reconsider!";
+    catArtDiv.textContent = "/\\_/\\  ( o_o )  > ♥ <";
+    moveNoButton();
+});
+noBtn.addEventListener('mouseover', moveNoButton);
 </script>
 
 </body>
